@@ -12,10 +12,11 @@ module CoEditPDF
     plugin :multi_route
 
     route do |routing|
+      @current_account = nil
       @current_account = {
         'username': 'fake_user',
         'password': '1234'
-      }
+      } if false
       routing.public
       routing.assets
       # routing.multi_route
