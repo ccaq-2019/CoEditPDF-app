@@ -15,6 +15,12 @@ gem 'rake'
 # Debugging
 gem 'pry'
 
+# Communication
+gem 'http'
+
+# Security
+gem 'rbnacl'
+
 # Development
 group :development do
   gem 'rubocop'

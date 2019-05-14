@@ -11,13 +11,15 @@ module CoEditPDF
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
 
+    ONE_MONTH = 30 * 24 * 60 * 60
+
+    use Rack::Session::Cookie,
+      expire_after: ONE_MONTH,
+      secret: config.SESSION_SECRET
+
     route do |routing|
-      @current_account = nil
-      @current_account = {
-        name: 'fake_user',
-        email: 'fake.email@mail.com',
-        'password': '1234'
-      } if true
+      @current_account = session[:current_account]
+
       routing.public
       routing.assets
       routing.multi_route

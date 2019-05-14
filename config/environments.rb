@@ -3,7 +3,7 @@
 require 'roda'
 require 'econfig'
 
-module Credence
+module CoEditPDF
   # Configuration for the API
   class App < Roda
     plugin :environments
@@ -17,7 +17,7 @@ module Credence
 
       # Allows running reload! in pry to restart entire app
       def self.reload!
-        exec 'pry -r ./spec/test_load_all'
+        exec 'pry -r ./specs/test_load_all'
       end
     end
   end

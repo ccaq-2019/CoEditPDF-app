@@ -13,11 +13,25 @@ module CoEditPDF
         routing.get do
           view :login
         end
+
+        # POST /auth/login
+        routing.post do
+          account = AuthenticateAccount.new(App.config).call(
+            name: routing.params['username'],
+            password: routing.params['password']
+          )
+
+          session[:current_account] = account
+          routing.redirect '/'
+        rescue StandardError
+          routing.redirect @login_route
+        end
       end
 
       routing.on 'logout' do
         # GET /auth/logout
         routing.get do
+          session[:current_account] = nil
           routing.redirect @login_route
         end
       end

@@ -10,7 +10,7 @@ module CoEditPDF
       routing.on do
         # GET /account/[account_name]
         routing.get String do |account_name|
-          if @current_account && @current_account[:name] == account_name
+          if @current_account && @current_account["name"] == account_name
             view :account, locals: { current_account: @current_account }
           else
             routing.redirect '/auth/login'
