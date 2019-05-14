@@ -8,11 +8,11 @@ nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark"
     ul class="navbar-nav mr-auto"
       - if @current_account
         li class="nav-item"
-          a href="/account/#{@current_account['username']}" class="nav-link" account
+          a href="/account/#{@current_account[:name]}" class="nav-link" account
         li class="nav-item"
-          a href='/auth/logout' class="nav-link" logout
+          a href="/auth/logout" class="nav-link" logout
       - else
         li class="nav-item"
-          a href='/auth/login' class="nav-link" login
+          a href="/auth/login" class="nav-link" login
         li class="nav-item"
-          a href='/auth/register' class="nav-link" register
+          a href="/auth/register" class="nav-link" register

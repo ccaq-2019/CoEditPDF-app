@@ -14,12 +14,13 @@ module CoEditPDF
     route do |routing|
       @current_account = nil
       @current_account = {
-        'username': 'fake_user',
+        name: 'fake_user',
+        email: 'fake.email@mail.com',
         'password': '1234'
-      } if false
+      } if true
       routing.public
       routing.assets
-      # routing.multi_route
+      routing.multi_route
 
       # GET /
       routing.root do
