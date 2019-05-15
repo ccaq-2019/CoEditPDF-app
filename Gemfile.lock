@@ -6,10 +6,13 @@ GEM
     ast (2.4.0)
     backport (1.0.0)
     coderay (1.1.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     econfig (2.1.0)
     ffi (1.10.0)
+    hashdiff (0.3.9)
     htmlentities (4.3.4)
     http (4.1.1)
       addressable (~> 2.3)
@@ -28,6 +31,9 @@ GEM
       ruby_dep (~> 1.2)
     method_source (0.9.2)
     mini_portile2 (2.4.0)
+    minitest (5.11.3)
+    minitest-rg (5.2.0)
+      minitest (~> 5.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     parallel (1.17.0)
@@ -67,6 +73,7 @@ GEM
       rubocop (>= 0.67.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    safe_yaml (1.0.5)
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -89,6 +96,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.6)
     unicode-display_width (1.5.0)
+    webmock (3.5.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     yard (0.9.19)
 
 PLATFORMS
@@ -97,6 +108,8 @@ PLATFORMS
 DEPENDENCIES
   econfig
   http
+  minitest
+  minitest-rg
   pry
   puma
   rack-test
@@ -108,6 +121,7 @@ DEPENDENCIES
   rubocop-performance
   slim
   solargraph
+  webmock
 
 RUBY VERSION
    ruby 2.6.2p47
