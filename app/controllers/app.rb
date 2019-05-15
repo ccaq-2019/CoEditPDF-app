@@ -10,6 +10,7 @@ module CoEditPDF
     plugin :assets, css: 'style.css', path: 'app/presentation/assets'
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
+    plugin :flash
 
     ONE_MONTH = 30 * 24 * 60 * 60
 

@@ -6,7 +6,7 @@ html
     / Bootstrap CSS and theme (Cerulean Theme)
     link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-T5jhQKMh96HMkXwqVMSjF3CmLcL1nT9//tCqu9By5XSdj7CwR0r+F3LTzUdfkkQf" crossorigin="anonymous"
     / Custom CSS
-    /== assets(:css)
+    == assets(:css)
   body
     / JQuery and Bootstrap JS
     script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"
@@ -15,4 +15,5 @@ html
     == render :nav
     div class='container' id='html_body'
       section
+        == render :flash_bar
         == yield
