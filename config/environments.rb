@@ -2,6 +2,8 @@
 
 require 'roda'
 require 'econfig'
+require 'rack/ssl-enforcer'
+require_relative '../require_app'
 
 module CoEditPDF
   # Configuration for the API
@@ -11,6 +13,10 @@ module CoEditPDF
     extend Econfig::Shortcut
     Econfig.env = environment.to_s
     Econfig.root = '.'
+
+    configure :production do
+      use Rack::SslEnforcer, hsts: true
+    end
 
     configure :development, :test do
       require 'pry'

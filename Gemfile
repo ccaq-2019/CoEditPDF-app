@@ -19,6 +19,7 @@ gem 'pry'
 gem 'http'
 
 # Security
+gem 'rack-ssl-enforcer'
 gem 'rbnacl'
 
 # Development
