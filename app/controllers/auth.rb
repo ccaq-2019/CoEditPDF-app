@@ -8,7 +8,7 @@ module CoEditPDF
   class App < Roda
     route('auth') do |routing|
       @login_route = '/auth/login'
-      routing.is 'login' do
+      routing.on 'login' do
         # GET /auth/login
         routing.get do
           view :login
