@@ -21,22 +21,26 @@ module CoEditPDF
             password: routing.params['password']
           )
 
-          session[:current_account] = account
+          SecureSession.new(session).set(:current_account, account)
           flash[:notice] = "Welcome back #{account['name']}!"
           routing.redirect '/'
         rescue AuthenticateAccount::UnauthorizedError
           flash[:error] = 'Username and password did not match our records'
+          response.status = 403
           routing.redirect @login_route
-        rescue StandardError
-          flash[:error] = 'Internal error, please try again later'
+        rescue StandardError => e
+          puts "LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Our servers are not responding -- please try later'
+          response.status = 500
           routing.redirect @login_route
         end
       end
 
-      routing.on 'logout' do
+      @logout_route = '/auth/logout'
+      routing.is 'logout' do
         # GET /auth/logout
         routing.get do
-          session[:current_account] = nil
+          SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
         end
       end

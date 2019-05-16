@@ -12,15 +12,17 @@ gem 'slim'
 gem 'econfig'
 gem 'rake'
 
-# Debugging
-gem 'pry'
-
-# Communication
-gem 'http'
-
 # Security
 gem 'rack-ssl-enforcer'
 gem 'rbnacl'
+
+# Communication
+gem 'http'
+gem 'redis'
+gem 'redis-rack'
+
+# Debugging
+gem 'pry'
 
 # Development
 group :development do
