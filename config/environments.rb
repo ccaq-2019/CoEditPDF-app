@@ -16,8 +16,8 @@ module CoEditPDF
     extend Econfig::Shortcut
     Econfig.env = environment.to_s
     Econfig.root = '.'
-		
-		ONE_MONTH = 30 * 24 * 60 * 60
+
+    ONE_MONTH = 30 * 24 * 60 * 60
 
     configure do
       SecureSession.setup(config)
@@ -26,13 +26,13 @@ module CoEditPDF
 
     configure :production do
       use Rack::SslEnforcer, hsts: true
-			
-			use Rack::Session::Redis,
+
+      use Rack::Session::Redis,
           expire_after: ONE_MONTH, redis_server: config.REDIS_URL
     end
-		
+
     configure :development, :test do
-			# use Rack::Session::Cookie,
+      # use Rack::Session::Cookie,
       #     expire_after: ONE_MONTH, secret: config.SESSION_SECRET
 
       use Rack::Session::Pool,
@@ -40,7 +40,7 @@ module CoEditPDF
 
       # use Rack::Session::Redis,
       #     expire_after: ONE_MONTH, redis_server: config.REDIS_URL
-		end		
+    end
 
     configure :development, :test do
       require 'pry'
