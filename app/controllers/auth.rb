@@ -16,10 +16,8 @@ module CoEditPDF
 
         # POST /auth/login
         routing.post do
-          account = AuthenticateAccount.new(App.config).call(
-            name: routing.params['username'],
-            password: routing.params['password']
-          )
+          account_data = JsonRequestBody.symbolize(routing.params)
+          account = AuthenticateAccount.new(App.config).call(account_data)
 
           SecureSession.new(session).set(:current_account, account)
           flash[:notice] = "Welcome back #{account['name']}!"
@@ -42,6 +40,28 @@ module CoEditPDF
         routing.get do
           SecureSession.new(session).delete(:current_account)
           routing.redirect @login_route
+        end
+      end
+
+      @register_route = '/auth/register'
+      routing.is 'register' do
+        # GET /auth/register
+        routing.get do
+          view :register
+        end
+
+        # POST /auth/register
+        routing.post do
+          account_data = JsonRequestBody.symbolize(routing.params)
+          CreateAccount.new(App.config).call(account_data)
+
+          flash[:notice] = 'Please login with your new account'
+          routing.redirect '/auth/login'
+        rescue StandardError => e
+          puts "ERROR CREATING ACCOUNT: #{e.inspect}"
+          puts e.backtrace
+          flash[:error] = 'Could not create account'
+          routing.redirect @register_route
         end
       end
     end
