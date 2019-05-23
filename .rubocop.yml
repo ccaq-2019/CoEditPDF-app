@@ -10,8 +10,8 @@ AllCops:
 Metrics/BlockLength:
   Enabled: true
   Exclude:
-    - app/controllers/auth.rb
     - specs/**/*
+    - app/controllers/**/*
     - Rakefile
 
 Security/YAMLLoad:
