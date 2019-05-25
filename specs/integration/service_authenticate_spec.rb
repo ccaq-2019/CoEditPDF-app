@@ -8,7 +8,8 @@ describe 'Test Service Objects' do
     @credentials = { name: 'Lisa', password: 'asfdkf' }
     @mal_credentials = { name: 'Lisa', password: 'wrongpassword' }
     @api_account = { attributes:
-                       { name: 'Lisa', email: 'sray@nthu.edu.tw' } }
+    { account: { attributes: { name: 'Lisa', email: 'sray@nthu.edu.tw' } },
+      auth_token: 'xxx' } }
   end
 
   after do
@@ -22,11 +23,14 @@ describe 'Test Service Objects' do
              .to_return(body: @api_account.to_json,
                         headers: { 'content-type' => 'application/json' })
 
-      account = CoEditPDF::AuthenticateAccount.new(app.config)
-                                              .call(@credentials)
-      _(account).wont_be_nil
-      _(account['name']).must_equal @api_account[:attributes][:name]
-      _(account['email']).must_equal @api_account[:attributes][:email]
+      account_info = CoEditPDF::AuthenticateAccount.new(app.config)
+                                                   .call(@credentials)
+      _(account_info).wont_be_nil
+      _(account_info[:account]['name']).must_equal @api_account[:attributes] \
+                                                [:account][:attributes][:name]
+      _(account_info[:account]['email']).must_equal @api_account[:attributes] \
+                                                [:account][:attributes][:email]
+      _(account_info[:auth_token]).wont_be_nil
     end
 
     it 'BAD: should not find a false authenticated account' do
