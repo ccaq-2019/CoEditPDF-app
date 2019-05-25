@@ -8,6 +8,8 @@ nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-primary"
     ul class="navbar-nav mr-auto"
       - if @current_account.logged_in?
         li class="nav-item"
+          a href="/pdfs/" class="nav-link" pdfs
+        li class="nav-item"
           a href="/account/#{@current_account.name}" class="nav-link" account
         li class="nav-item"
           a href="/auth/logout" class="nav-link" logout
