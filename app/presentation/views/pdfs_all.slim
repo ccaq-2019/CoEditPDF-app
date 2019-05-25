@@ -1,0 +1,13 @@
+div class="row" style="vertical-align: bottom;"
+  div class="col-xs-9"
+    h3 All Pdfs
+  div class="col-xs-3"
+table class="table"
+  thead
+    tr
+      th Pdf name
+  tbody
+    - pdfs.all.each do |pdf|
+      tr
+        td 
+          a #{pdf.filename}

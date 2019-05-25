@@ -6,12 +6,15 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - _snippets/*
+
+# Layout/EndOfLine:
+#   Enabled: false
   
 Metrics/BlockLength:
   Enabled: true
   Exclude:
-    - app/controllers/auth.rb
     - specs/**/*
+    - app/controllers/**/*
     - Rakefile
 
 Security/YAMLLoad:
