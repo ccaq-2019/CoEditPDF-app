@@ -19,9 +19,11 @@ module CoEditPDF
 
         # POST /account/<token>
         routing.post String do |registration_token|
-          raise 'Passwords do not match or empty' if
-            routing.params['password'].empty? ||
-            routing.params['password'] != routing.params['password_confirm']
+          password_check = Form::Passwords.call(routing.params)
+
+          if password_check.failure?
+            raise Form.message_values(password_check)
+          end
 
           new_account = SecureMessage.decrypt(registration_token)
           CreateAccount.new(App.config).call(
