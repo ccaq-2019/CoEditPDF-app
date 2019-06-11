@@ -7,6 +7,7 @@ ruby '2.6.2'
 gem 'puma'
 gem 'roda'
 gem 'slim'
+gem 'shrine', '~> 2.0'
 
 # Configuration
 gem 'econfig'
