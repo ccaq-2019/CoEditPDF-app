@@ -40,7 +40,7 @@ end
 
 desc 'Checks for release'
 task :release? => [:spec, :style, :audit] do
-  puts "\nReday for release!"
+  puts "\nReady for release!"
 end
 
 namespace :run do
