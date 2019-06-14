@@ -1,3 +1,5 @@
+link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"
+
 div class="row" style="vertical-align: bottom;"
   div class="col-xs-9"
     h3 All Pdfs
@@ -9,5 +11,8 @@ table class="table"
   tbody
     - pdfs.all.each do |pdf|
       tr
-        td 
-          a #{pdf.filename}
+        td
+          div class="d-flex align-items-center justify-content-between"
+              == pdf.filename
+              a class="btn btn-success" href="/pdfs/edit"
+                i class="fa fa-pencil-square-o" aria-hidden="true"
