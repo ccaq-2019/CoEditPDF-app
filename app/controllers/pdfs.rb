@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'roda'
+require 'base64'
 
 module CoEditPDF
   # Web controller for CoEditPDF API
@@ -19,6 +20,20 @@ module CoEditPDF
           else
             routing.redirect '/auth/login'
           end
+        end
+
+        # POST /pdfs/
+        routing.post do
+          filename = routing.params['pdf_file'][:filename]
+          file = routing.params['pdf_file'][:tempfile]
+          content = Base64.strict_encode64(file.read)
+
+          UploadPdf.new(App.config)
+                   .call(current_account: @current_account,
+                         filename: filename,
+                         file_read: content)
+
+          routing.redirect '/pdfs'
         end
       end
     end

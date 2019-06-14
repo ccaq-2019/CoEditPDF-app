@@ -2,6 +2,9 @@ div class="row" style="vertical-align: bottom;"
   div class="col-xs-9"
     h3 All Pdfs
   div class="col-xs-3"
+form method="post" action="/pdfs" enctype="multipart/form-data" 
+  input type="file" name="pdf_file"
+  input type="submit" value="Upload PDF"
 table class="table"
   thead
     tr
