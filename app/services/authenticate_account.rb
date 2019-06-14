@@ -15,7 +15,7 @@ module CoEditPDF
       response = HTTP.post("#{@config.API_URL}/auth/authenticate",
                            json: { name: name, password: password })
 
-      raise(NotAuthenticatedError) if response.code == 403
+      raise(NotAuthenticatedError) if response.code == 401
       raise if response.code != 200
 
       account_info = response.parse['data']['attributes']

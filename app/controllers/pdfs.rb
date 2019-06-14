@@ -8,6 +8,11 @@ module CoEditPDF
   class App < Roda
     route('pdfs') do |routing|
       routing.on do
+        # GET /pdfs/edit
+        routing.get 'edit' do
+          view :pdf_edit
+        end
+
         # GET /pdfs/
         routing.get do
           if @current_account.logged_in?
