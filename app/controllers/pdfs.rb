@@ -31,7 +31,7 @@ module CoEditPDF
           UploadPdf.new(App.config)
                    .call(current_account: @current_account,
                          filename: filename,
-                         file_read: content)
+                         content: content)
 
           routing.redirect '/pdfs'
         end

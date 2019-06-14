@@ -11,8 +11,8 @@ module CoEditPDF
       @config = config
     end
 
-    def call(current_account:, filename:, file_read:)
-      message = { filename: filename, file_read: file_read }
+    def call(current_account:, filename:, content:)
+      message = { filename: filename, content: content }
 
       response = HTTP.auth("Bearer #{current_account.auth_token}")
                      .post("#{@config.API_URL}/pdfs/", json: message)
