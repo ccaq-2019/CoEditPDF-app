@@ -12,6 +12,7 @@ module CoEditPDF
     end
 
     def call(current_account:, filename:, content:)
+      content = Base64.strict_encode64(content)
       message = { filename: filename, content: content }
 
       response = HTTP.auth("Bearer #{current_account.auth_token}")
