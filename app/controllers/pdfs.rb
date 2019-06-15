@@ -8,9 +8,19 @@ module CoEditPDF
   class App < Roda
     route('pdfs') do |routing|
       routing.on do
-        # GET /pdfs/edit
-        routing.get 'edit' do
-          view :pdf_edit
+        # GET /pdfs/[pdf_id]
+        routing.on String do |pdf_id|
+          @pdf_data = GetPdf.new(App.config).call(@current_account, pdf_id)
+          pdf = Pdf.new(@pdf_data)
+
+          routing.get 'file' do
+            response['Content-Type'] = 'application/pdf'
+            pdf.content
+          end
+
+          routing.get do
+            view :pdf_edit, locals: { pdf_id: pdf_id }
+          end
         end
 
         # GET /pdfs/

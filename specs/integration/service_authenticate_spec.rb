@@ -43,7 +43,7 @@ describe 'Test Service Objects' do
     it 'BAD: should not find a false authenticated account' do
       WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
              .with(body: @mal_credentials.to_json)
-             .to_return(status: 403)
+             .to_return(status: 401)
       proc {
         CoEditPDF::AuthenticateAccount.new(app.config).call(@mal_credentials)
       }.must_raise CoEditPDF::AuthenticateAccount::NotAuthenticatedError

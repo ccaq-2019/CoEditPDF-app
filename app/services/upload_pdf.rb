@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'http'
+require 'base64'
 
 module CoEditPDF
   # Creates an account
