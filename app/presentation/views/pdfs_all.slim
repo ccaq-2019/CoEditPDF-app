@@ -5,9 +5,30 @@ div class="row" style="vertical-align: bottom;"
 table class="table"
   thead
     tr
-      th Pdf name
+      th Owned Pdfs
+      th Owner
+      th Collaborators
   tbody
-    - pdfs.all.each do |pdf|
+    - pdfs.owned_pdfs.each do |pdf|
       tr
+        td #{pdf.filename}
+        td #{pdf.owner.name}
         td 
-          a #{pdf.filename}
+          - pdf.collaborators.each do |c|
+            a #{c.name}
+            br
+table class="table"
+  thead
+    tr
+      th Collaborate Pdfs
+      th Owner
+      th Collaborators
+  tbody
+    - pdfs.collaborate_pdfs.each do |pdf|
+      tr
+        td #{pdf.filename}
+        td #{pdf.owner.name}
+        td 
+          - pdf.collaborators.each do |c|
+            a #{c.name}
+            br

@@ -64,7 +64,7 @@ module CoEditPDF
                        .new(App.config)
                        .call(routing.params['code'])
 
-          current_account = CurrentAccount.new(
+          current_account = Account.new(
             authorized[:account],
             authorized[:auth_token]
           )
