@@ -14,8 +14,8 @@ table class="table"
         td #{pdf.filename}
         td #{pdf.owner.name}
         td 
-          - pdf.collaborators.each do |c|
-            a #{c.name}
+          - pdf.collaborators.each do |collaborator|
+            a #{collaborator.name}
             br
 table class="table"
   thead
@@ -29,6 +29,30 @@ table class="table"
         td #{pdf.filename}
         td #{pdf.owner.name}
         td 
-          - pdf.collaborators.each do |c|
-            a #{c.name}
+          - pdf.collaborators.each do |collaborator|
+            a #{collaborator.name}
             br
+h3 Collaborators of Owned Pdfs
+- pdfs.owned_pdfs.each do |pdf|
+  div id="accordian"
+    div class="card"
+      div class="card-header" 
+        a class="card-link" data-toggle="collapse" href="#collapse#{pdf.id}" #{pdf.filename}
+      div id="collapse#{pdf.id}" class="collapse show" data-parent="#accordian"
+        div class="card-body"
+          - if pdf.collaborators.empty?
+            span There are no collaborators yet
+          ul class="list-group"
+            - pdf.collaborators.each do |collaborator|
+              li class="list-group-item clearfix"
+                '  #{collaborator.name}
+                - if pdfs.owned_pdf_policy.can_remove_collaborators
+                  span class="float-right"
+                    form role='form' method='post' action="/pdfs/#{pdf.id}/collaborators"
+                      input type='hidden' name='action' value='remove'
+                      input type='hidden' name='collaborator_email' value="#{collaborator.email}"
+                      button type="submit" class="btn btn-xs btn-default"
+                        span class="fas fa-times"
+          - if pdfs.owned_pdf_policy.can_add_collaborators
+            button type="button" class="btn btn-success" data-toggle="modal" data-target="#newCollaboratorModal#{pdf.id}" + Add Collaborator
+      include :collaborator_new_partial
