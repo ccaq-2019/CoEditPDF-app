@@ -15,3 +15,17 @@
 #canvas {
   cursor: text;
 }
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+}

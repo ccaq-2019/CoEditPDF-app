@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module CoEditPDF
   # Base class for CoEditPDF Web Application
