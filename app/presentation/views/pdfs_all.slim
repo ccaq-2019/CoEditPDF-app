@@ -10,28 +10,29 @@ form method="post" action="/pdfs" enctype="multipart/form-data"
 table class="table"
   thead class="thead-light"
     tr
-      th scope="col" Owned Pdfs
-      th scope="col" Owner
-      th scope="col" Collaborators
+      th Owned Pdfs
+      th Owner
+      th Collaborators
+      th Edit
   tbody
     - pdfs.owned_pdfs.each do |pdf|
       tr
-        td
-          div class="d-flex align-items-center justify-content-between"
-            == pdf.filename
-            a class="btn btn-success" href="/pdfs/#{pdf.id}"
-              i class="far fa-edit" aria-hidden="true"
+        td #{pdf.filename} 
         td #{pdf.owner.name}
         td 
           - pdf.collaborators.each do |collaborator|
             a #{collaborator.name}
             br
+        td 
+          a class="btn btn-success" href="/pdfs/#{pdf.id}"
+                i class="far fa-edit" aria-hidden="true"
 table class="table"
   thead class="thead-light"
     tr
       th Collaborate Pdfs
       th Owner
       th Collaborators
+      th Edit
   tbody
     - pdfs.collaborate_pdfs.each do |pdf|
       tr
@@ -41,6 +42,9 @@ table class="table"
           - pdf.collaborators.each do |collaborator|
             a #{collaborator.name}
             br
+        td 
+          a class="btn btn-success" href="/pdfs/#{pdf.id}"
+                i class="far fa-edit" aria-hidden="true"
 h3 Collaborators of Owned Pdfs
 - pdfs.owned_pdfs.each do |pdf|
   div id="accordian"

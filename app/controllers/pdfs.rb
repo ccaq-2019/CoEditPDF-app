@@ -48,7 +48,7 @@ module CoEditPDF
           routing.get 'file' do
             @pdf_data = GetPdf.new(App.config).call(@current_account, pdf_id)
             pdf = Pdf.new(@pdf_data)
-            
+
             response['Content-Type'] = 'application/pdf'
             pdf.content
           end
