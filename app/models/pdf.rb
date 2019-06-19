@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require 'base64'
+
 module CoEditPDF
   # Behaviors of a pdf document
   class Pdf
-    attr_reader :id, :filename,
+    attr_reader :id, :filename, :content,
                 :owner, :collaborators
 
     def initialize(pdf_info)
@@ -16,6 +18,9 @@ module CoEditPDF
     def process_attributes(attributes)
       @id = attributes['id']
       @filename = attributes['filename']
+      return unless attributes['content']
+
+      @content = Base64.strict_decode64(attributes['content'])
     end
 
     def process_relationships(relationships)

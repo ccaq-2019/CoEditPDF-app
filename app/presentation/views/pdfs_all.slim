@@ -1,28 +1,38 @@
-div class="row" style="vertical-align: bottom;"
-  div class="col-xs-9"
-    h3 All Pdfs
-  div class="col-xs-3"
+h3 All Pdfs
+form method="post" action="/pdfs" enctype="multipart/form-data"
+  div class="row justify-content-around align-items-center mb-3"
+    div class="col-3"
+      label Upload a PDF file
+    div class="col-6"
+      input type="file" name="pdf_file"
+    dev class="col-2"
+      button type="submit" class="btn btn-primary btn-sm" Upload
 table class="table"
   thead class="thead-light"
     tr
       th Owned Pdfs
       th Owner
       th Collaborators
+      th Edit
   tbody
     - pdfs.owned_pdfs.each do |pdf|
       tr
-        td #{pdf.filename}
+        td #{pdf.filename} 
         td #{pdf.owner.name}
         td 
           - pdf.collaborators.each do |collaborator|
             a #{collaborator.name}
             br
+        td 
+          a class="btn btn-success" href="/pdfs/#{pdf.id}"
+                i class="far fa-edit" aria-hidden="true"
 table class="table"
   thead class="thead-light"
     tr
       th Collaborate Pdfs
       th Owner
       th Collaborators
+      th Edit
   tbody
     - pdfs.collaborate_pdfs.each do |pdf|
       tr
@@ -32,6 +42,9 @@ table class="table"
           - pdf.collaborators.each do |collaborator|
             a #{collaborator.name}
             br
+        td 
+          a class="btn btn-success" href="/pdfs/#{pdf.id}"
+                i class="far fa-edit" aria-hidden="true"
 h3 Collaborators of Owned Pdfs
 - pdfs.owned_pdfs.each do |pdf|
   div id="accordian"

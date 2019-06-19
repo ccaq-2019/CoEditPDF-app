@@ -2,6 +2,20 @@
   padding-top: 15px;
 }
 
+.full-page {
+  position: absolute;
+  left: 0px;
+}
+
+#canvas-container {
+  width: 100%;
+  height: 1200px;
+}
+
+#canvas {
+  cursor: text;
+}
+
 table {
   width: 100%;
   table-layout: fixed;
