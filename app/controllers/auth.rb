@@ -30,7 +30,7 @@ module CoEditPDF
           credentials = Form::LoginCredentials.call(routing.params)
 
           if credentials.failure?
-            flash[:error] = 'Please enter both username and password'
+            flash[:error] = Form.validation_errors(credentials)
             routing.redirect @login_route
           end
 

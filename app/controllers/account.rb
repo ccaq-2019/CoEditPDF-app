@@ -22,7 +22,8 @@ module CoEditPDF
           password_check = Form::Passwords.call(routing.params)
 
           if password_check.failure?
-            raise Form.message_values(password_check)
+            flash[:error] = Form.message_values(password_check)
+            routing.redirect("/auth/register/#{registration_token}")
           end
 
           new_account = SecureMessage.decrypt(registration_token)
@@ -38,9 +39,7 @@ module CoEditPDF
           routing.redirect '/auth/register'
         rescue StandardError => e
           flash[:error] = e.message
-          routing.redirect(
-            "#{App.config.APP_URL}/auth/register/#{registration_token}"
-          )
+          routing.redirect("/auth/register/#{registration_token}")
         end
       end
     end

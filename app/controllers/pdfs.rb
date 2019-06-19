@@ -50,8 +50,7 @@ module CoEditPDF
           pdfs = Pdfs.new(pdf_list)
 
           view :pdfs_all,
-               locals: { current_user: @current_account,
-                         pdfs: pdfs }
+               locals: { current_user: @current_account, pdfs: pdfs }
         end
       end
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CoEditPDF
-  # Behaviors of the currently logged in account
+  # Behaviors of a pdf document
   class Pdf
     attr_reader :id, :filename,
                 :owner, :collaborators
