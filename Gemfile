@@ -26,6 +26,9 @@ gem 'redis-rack'
 gem 'pry'
 gem 'rack-test'
 
+# PDF
+gem 'hexapdf'
+
 # Development
 group :development do
   gem 'rubocop'
