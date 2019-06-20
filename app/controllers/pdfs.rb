@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'base64'
+require 'hexapdf'
 
 module CoEditPDF
   # Web controller for CoEditPDF API
@@ -48,14 +49,36 @@ module CoEditPDF
           routing.get 'file' do
             @pdf_data = GetPdf.new(App.config).call(@current_account, pdf_id)
             pdf = Pdf.new(@pdf_data)
-
             response['Content-Type'] = 'application/pdf'
             pdf.content
           end
 
+          # POST /pdfs/[pdf_id]/edit
+          routing.post 'edit' do
+            EditPdf.new(App.config).call(
+              current_account: @current_account,
+              pdf_id: pdf_id,
+              edit_data: routing.params
+            )
+
+            { message: 'Text added' }.to_json
+          rescue EditPdf::EditError
+            flash[:error] = 'Fail to add text to the file'
+            routing.halt 400
+          end
+
           # GET /pdfs/[pdf_id]
           routing.get do
-            view :pdf_edit, locals: { pdf_id: pdf_id }
+            @pdf_data = GetPdf.new(App.config).call(@current_account, pdf_id)
+            pdf = Pdf.new(@pdf_data)
+            File.open("#{pdf_id}.pdf", 'wb') { |file| file.write(pdf.content) }
+            document = HexaPDF::Document.open("#{pdf_id}.pdf")
+            page = document.pages[0]
+            width = page.box.width.round
+            height = page.box.height.round
+
+            view :pdf_edit,
+                 locals: { pdf_id: pdf_id, width: width, height: height }
           end
 
           # POST /pdfs/[pdf_id]
@@ -92,7 +115,10 @@ module CoEditPDF
                          filename: filename,
                          content: content)
 
-          routing.redirect '/pdfs'
+        rescue UploadPdf::UploadError
+          flash[:error] = 'Failed to upload the file'
+        ensure
+          routing.redirect @pdfs_route
         end
       end
     end
