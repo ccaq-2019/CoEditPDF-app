@@ -57,6 +57,19 @@ module CoEditPDF
           routing.get do
             view :pdf_edit, locals: { pdf_id: pdf_id }
           end
+
+          # POST /pdfs/[pdf_id]
+          routing.post do
+            RemovePdf.new(App.config).call(
+              current_account: @current_account,
+              pdf_id: pdf_id
+            )
+            flash[:notice] = 'Pdf removed'
+          rescue StandardError
+            flash[:error] = 'Could not remove pdf'
+          ensure
+            routing.redirect @pdfs_route
+          end
         end
 
         # GET /pdfs/
