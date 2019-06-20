@@ -1,0 +1,10 @@
+div id="deletePdfModal#{pdf.id}" class="modal fade" role="dialog"
+  div class="modal-dialog modal-sm"
+    div class="modal-content"
+      div class="modal-header"
+        h4 id="warning" Warning
+      div class="modal-body"
+        h5 Delete "#{pdf.filename}"?
+        form role="form" action="/pdfs/#{pdf.id}" method="post"
+          button type="button" class="btn btn-default" data-dismiss="modal" Cancel
+          button type="submit" class="submit" value="submit" class="btn btn-danger" Delete        
