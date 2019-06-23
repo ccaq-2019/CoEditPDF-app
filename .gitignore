@@ -1,2 +1,4 @@
 .rake_tasks~
 config/secrets.yml
+coverage/*
+!coverage/.resultset.json
