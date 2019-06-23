@@ -12,9 +12,12 @@ module CoEditPDF
     end
 
     def call(name:, email:, password:)
-      message = { name: name, email: email, password: password }
+      account = { name: name, email: email, password: password }
 
-      response = HTTP.post("#{@config.API_URL}/accounts/", json: message)
+      response = HTTP.post(
+        "#{@config.API_URL}/accounts/",
+        json: SignedMessage.sign(account)
+      )
 
       raise InvalidAccountError unless response.code == 201
     end

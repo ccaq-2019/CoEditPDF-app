@@ -61,8 +61,8 @@ module CoEditPDF
         # GET /auth/sso_callback
         routing.get do
           authorized = AuthorizeGithubAccount
-                       .new(App.config)
-                       .call(routing.params['code'])
+            .new(App.config)
+            .call(routing.params['code'])
 
           current_account = Account.new(
             authorized[:account],

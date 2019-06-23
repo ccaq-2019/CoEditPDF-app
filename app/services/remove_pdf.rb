@@ -14,7 +14,7 @@ class RemovePdf
 
   def call(current_account:, pdf_id:)
     response = HTTP.auth("Bearer #{current_account.auth_token}")
-                   .delete("#{api_url}/pdfs/#{pdf_id}")
+      .delete("#{api_url}/pdfs/#{pdf_id}")
 
     raise PdfNotRemoved unless response.code == 200
   end

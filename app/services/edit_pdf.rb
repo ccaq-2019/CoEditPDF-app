@@ -13,8 +13,8 @@ module CoEditPDF
 
     def call(current_account:, pdf_id:, edit_data:)
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                     .put("#{@api_url}/pdfs/#{pdf_id}/edit",
-                          json: { edit_data: edit_data })
+        .put("#{@api_url}/pdfs/#{pdf_id}/edit",
+             json: { edit_data: edit_data })
 
       raise EditError unless response.code == 200
     end

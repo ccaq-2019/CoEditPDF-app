@@ -12,8 +12,9 @@ module CoEditPDF
     end
 
     def call(name:, password:)
+      credentials = { name: name, password: password }
       response = HTTP.post("#{@config.API_URL}/auth/authenticate",
-                           json: { name: name, password: password })
+                           json: SignedMessage.sign(credentials))
 
       raise(NotAuthenticatedError) if response.code == 401
       raise if response.code != 200
