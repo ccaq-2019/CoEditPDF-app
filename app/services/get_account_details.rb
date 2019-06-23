@@ -19,7 +19,6 @@ class GetAccountDetails
     response = HTTP.auth("Bearer #{current_account.auth_token}")
                    .get("#{@config.API_URL}/accounts/#{username}")
     raise InvalidAccount if response.code != 200
-    puts response.body
 
     data = response.parse['data']
     account_details = data['attributes']['account']
