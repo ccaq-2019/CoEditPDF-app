@@ -17,7 +17,7 @@ module CoEditPDF
       message = { filename: filename, content: content }
 
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                     .post("#{@config.API_URL}/pdfs/", json: message)
+        .post("#{@config.API_URL}/pdfs/", json: message)
 
       raise UploadError unless response.code == 201
     end

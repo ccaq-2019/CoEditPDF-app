@@ -11,7 +11,7 @@ class GetPdf
 
   def call(current_account, pdf_id)
     response = HTTP.auth("Bearer #{current_account.auth_token}")
-                   .get("#{@config.API_URL}/pdfs/#{pdf_id}")
+      .get("#{@config.API_URL}/pdfs/#{pdf_id}")
 
     response.code == 200 ? response.parse['data'] : nil
   end

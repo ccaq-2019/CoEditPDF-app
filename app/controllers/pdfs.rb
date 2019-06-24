@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'roda'
+require_relative './app'
 require 'base64'
 require 'hexapdf'
 
@@ -111,9 +112,9 @@ module CoEditPDF
           content = file.read
 
           UploadPdf.new(App.config)
-                   .call(current_account: @current_account,
-                         filename: filename,
-                         content: content)
+            .call(current_account: @current_account,
+                  filename: filename,
+                  content: content)
 
         rescue UploadPdf::UploadError
           flash[:error] = 'Failed to upload the file'

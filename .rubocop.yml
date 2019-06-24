@@ -9,6 +9,10 @@ AllCops:
 
 # Layout/EndOfLine:
 #   Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
   
 Metrics/BlockLength:
   Enabled: true

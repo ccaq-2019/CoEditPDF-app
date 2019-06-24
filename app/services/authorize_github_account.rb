@@ -26,19 +26,19 @@ module CoEditPDF
     def get_access_token_from_github(code)
       challenge_response =
         HTTP.headers(accept: 'application/json')
-            .post(@config.GH_TOKEN_URL,
-                  form: { client_id: @config.GH_CLIENT_ID,
-                          client_secret: @config.GH_CLIENT_SECRET,
-                          code: code })
+          .post(@config.GH_TOKEN_URL,
+                form: { client_id: @config.GH_CLIENT_ID,
+                        client_secret: @config.GH_CLIENT_SECRET,
+                        code: code })
       raise UnauthorizedError unless challenge_response.status < 400
 
       challenge_response.parse['access_token']
     end
 
     def get_sso_account_from_api(access_token)
-      response =
-        HTTP.post("#{@config.API_URL}/auth/sso",
-                  json: { access_token: access_token })
+      signed_sso_info = SignedMessage.sign(access_token: access_token)
+      response = HTTP.post("#{@config.API_URL}/auth/sso",
+                           json: signed_sso_info)
       raise if response.code > 400
 
       account_info = response.parse['data']['attributes']
