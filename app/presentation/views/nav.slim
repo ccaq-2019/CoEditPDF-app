@@ -3,7 +3,7 @@ nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-primary"
     img alt="CoEditPDF" src="/logo.png" class="d-inline-block align-top" width="30px" height="30px"
     span  CoEditPDF
   button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
-    span class="navbar-toggler-icon"
+    span data-toggle="tooltip" data-delay="<%= tooltipDelayMs %>" data-placement="bottom" title="Menu" = "=" # To prevent CSP violation
   div id="navbarCollapse" class="collapse navbar-collapse"
     ul class="navbar-nav mr-auto"
       - if @current_account.logged_in?
