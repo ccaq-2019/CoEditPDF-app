@@ -1,4 +1,4 @@
-h3 All Pdfs
+h3 All PDFs
 form method="post" action="/pdfs" enctype="multipart/form-data"
   div class="row justify-content-around align-items-center mb-3"
     div class="col-3"
@@ -10,7 +10,7 @@ form method="post" action="/pdfs" enctype="multipart/form-data"
 table class="table"
   thead class="thead-light"
     tr
-      th Owned Pdfs
+      th Owned PDFs
       th Owner
       th Collaborators
       th Edit
@@ -36,7 +36,7 @@ table class="table"
 table class="table"
   thead class="thead-light"
     tr
-      th Collaborate Pdfs
+      th Collaborate PDFs
       th Owner
       th Collaborators
       th Edit
@@ -53,7 +53,7 @@ table class="table"
         td 
           a class="btn btn-success" href="/pdfs/#{pdf.id}"
             i class="far fa-edit" aria-hidden="true"
-h3 Collaborators of Owned Pdfs
+h3 Collaborators of Owned PDFs
 - pdfs.owned_pdfs.each do |pdf|
   div id="accordian"
     div class="card"
